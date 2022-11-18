@@ -1,12 +1,10 @@
 # Ansible Role: Pip (for Python)
 
-[![CI](https://github.com/geerlingguy/ansible-role-pip/workflows/CI/badge.svg?event=push)](https://github.com/geerlingguy/ansible-role-pip/actions?query=workflow%3ACI)
-
-An Ansible Role that installs [Pip](https://pip.pypa.io) on Linux.
+An Ansible Role that installs [Pip](https://pip.pypa.io) packages on Linux.
 
 ## Requirements
 
-On RedHat/CentOS, you may need to have EPEL installed before running this role. You can use the `geerlingguy.repo-epel` role if you need a simple way to ensure it's installed.
+On RedHat/CentOS, you may need to have EPEL installed before running this role. On Amazon Linux 2 you need to have Python 3.8 already installed.
 
 ## Role Variables
 
@@ -18,7 +16,7 @@ The name of the packge to install to get `pip` on the system. For older systems 
 
     pip_executable: pip3
 
-The role will try to autodetect the pip executable based on the `pip_package` (e.g. `pip` for Python 2 and `pip3` for Python 3). You can also override this explicitly, e.g. `pip_executable: pip3.6`.
+The role will try to autodetect the pip executable based on the `pip_package` (e.g. `pip` for Python 2 and `pip3` for Python 3 or if on Amazon Linux, `pip3.8`). You can also override this explicitly, e.g. `pip_executable: pip3.6`.
 
     pip_install_packages: []
 
@@ -69,7 +67,7 @@ None.
           - name: awscli
     
       roles:
-        - geerlingguy.pip
+        - pip
 
 ## License
 
@@ -77,4 +75,4 @@ MIT / BSD
 
 ## Author Information
 
-This role was created in 2017 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/).
+This role was created in 2017 by [Jeff Geerling](https://www.jeffgeerling.com/), author of [Ansible for DevOps](https://www.ansiblefordevops.com/). It has been modified for internal use at Pedigree Technologies.
