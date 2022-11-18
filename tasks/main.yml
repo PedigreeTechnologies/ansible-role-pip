@@ -1,11 +1,12 @@
 ---
 - name: Ensure Pip is installed.
-  package:
+  ansible.builtin.package:
     name: "{{ pip_package }}"
     state: present
+  when: ansible_distribution != 'Amazon'
 
 - name: Ensure pip_install_packages are installed.
-  pip:
+  ansible.builtin.pip:
     name: "{{ item.name | default(item) }}"
     version: "{{ item.version | default(omit) }}"
     virtualenv: "{{ item.virtualenv | default(omit) }}"

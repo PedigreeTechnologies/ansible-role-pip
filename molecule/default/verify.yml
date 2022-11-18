@@ -1,0 +1,23 @@
+---
+- name: Verify
+  hosts: all
+  any_errors_fatal: true
+
+  tasks:
+    - name: Include Ansible default vars
+      ansible.builtin.include_vars:
+        dir: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') }}/defaults/"
+        extensions:
+          - 'yml'
+    - name: Get pip packages list
+      community.general.pip_package_info:
+        clients:
+          - "{{ pip_executable }}"
+      register: pip_packages
+
+    - name: "Check that pip packages are installed"
+      ansible.builtin.assert:
+        that: ("{{ item.version }} in {{ pip_packages.packages[pip_executable][item.name].0.version }}")
+      with_items:
+        - { name: 'ipaddress', version: "1.0.18" }
+        - { name: 'colorama', version: "*" }
