@@ -1,6 +1,6 @@
 ---
 # For Python 3, use python3-pip.
-python_version: "3.8"
-pip_executable: "pip{{ python_version }}"
+pip_package: python3-pip
+pip_executable: "{{ 'pip3.8' if ansible_distribution == 'Amazon' else 'pip3' if pip_package.startswith('python3') else 'pip' }}"
 
 pip_install_packages: []
