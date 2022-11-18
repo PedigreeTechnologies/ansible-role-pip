@@ -4,3 +4,4 @@
   become: true
   roles:
     - role: python
+      when: ansible_distribution == 'Amazon'

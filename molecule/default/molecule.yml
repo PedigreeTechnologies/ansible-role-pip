@@ -8,6 +8,10 @@ platforms:
     image: pedigreetechnologies/docker-amazonlinux2-base:latest
     privileged: true
     pre_build_image: true
+  - name: linuxmint-21
+    image: linuxmintd/mint21-amd64:latest
+    privileged: true
+    pre_build_image: true
 provisioner:
   name: ansible
   log: true
